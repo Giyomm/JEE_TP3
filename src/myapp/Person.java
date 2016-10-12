@@ -1,22 +1,22 @@
 package myapp;
 
-import java.util.Date;
-
 public class Person {
 
-	private int personID;
-	private String nom,prenom,adresseMail;
-	private Date dateNaissance;
+	private String personID;
+	private String nom;
+	private String prenom;
+	private String adresseMail;
+	private String dateNaissance;
 	
 	public Person () {
 		
 	}
 
-	public int getPersonID() {
+	public String getPersonID() {
 		return personID;
 	}
 
-	public void setPersonID(int personID) {
+	public void setPersonID(String personID) {
 		this.personID = personID;
 	}
 
@@ -44,11 +44,11 @@ public class Person {
 		this.adresseMail = adresseMail;
 	}
 
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 	

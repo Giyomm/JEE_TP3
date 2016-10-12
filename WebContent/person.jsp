@@ -13,10 +13,11 @@
 </jsp:useBean>
 <table>
 	<tr>
-		<th>ID
-		</th>
+		<th>ID</th>
 		<th>Nom</th>
 		<th>Prenom</th>
+		<th>Mail</th>
+		<th>Date de Naissance</th>
 	</tr>
 	<tr>
 		<td>
@@ -27,6 +28,12 @@
 		</td>
 		<td>
 		<%= person.getPrenom() %>
+		</td>
+		<td>
+		<%= person.getAdresseMail() %>
+		</td>
+		<td>
+		<%= person.getDateNaissance() %>
 		</td>
 	</tr>
 

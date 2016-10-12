@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import myapp.Person;
+import myapp.PersonManager;
+import myapp.errors.PersonError;
 
 @WebServlet("/edition")
 public class Edition extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	public void init (ServletConfig c) throws ServletException {
 		
@@ -30,14 +34,31 @@ public class Edition extends HttpServlet {
 			request.getSession().setAttribute("person", new Person());
 			
 		Person p = (Person) request.getSession().getAttribute("person");
-		p.setPersonID(Integer.valueOf(request.getParameter("ID")));
+		p.setPersonID(request.getParameter("ID"));
 		p.setNom(request.getParameter("nom"));
 		p.setPrenom(request.getParameter("prenom"));
 		p.setAdresseMail(request.getParameter("mail"));
+		p.setDateNaissance(request.getParameter("dateNaissance"));
 		
-		request.getSession().setAttribute("person", p);
-		request.getRequestDispatcher("/person.jsp").forward(request, response);
-			   
+		PersonManager pm = new PersonManager();
+		PersonError err = new PersonError();
+
+		try {
+			err = pm.check(p);
+			if(err.isHasError()){
+				request.setAttribute("personErr", err);
+				request.getRequestDispatcher("/edition.jsp").forward(request, response);
+			}
+			else{
+				pm.save(p);
+				request.getSession().setAttribute("person", p);
+				request.getRequestDispatcher("/person.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 	
 }
